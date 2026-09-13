@@ -947,3 +947,48 @@ tr.period-8-row {
         line-height: 1.1;
     }
 }
+/* ═══════════════════════════════════════════════════════════
+   上一班 / 下一班 快速切換按鈕樣式
+═══════════════════════════════════════════════════════════ */
+
+/* 按鈕容器（若有包裹容器）或按鈕本身的間距 */
+#prevClassBtn, 
+#nextClassBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    margin: 0 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #4a6fa5; /* 可依您的主題主色調整 */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* 懸停效果 */
+#prevClassBtn:hover:not(:disabled), 
+#nextClassBtn:hover:not(:disabled) {
+    background-color: #3b5998;
+}
+
+/* 停用狀態（第 1 班的上一班、最後一班的下一班） */
+#prevClassBtn:disabled, 
+#nextClassBtn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 行動裝置響應式微調 */
+@media (max-width: 600px) {
+    #prevClassBtn, 
+    #nextClassBtn {
+        padding: 5px 10px;
+        font-size: 0.825rem;
+    }
+}
