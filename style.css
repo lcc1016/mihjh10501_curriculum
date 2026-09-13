@@ -385,26 +385,31 @@ body {
 }
 
 /* ── 課表結果頁按鈕控制區 (雙行配置) ──────────────────────── */
+/* ── 課表結果頁按鈕控制區 ─────────────────────────────── */
 .action-bar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 6px;
     width: 100%;
     max-width: 600px;
     margin: 0 auto 16px auto;
 }
 
-/* 第 1 行：返回上一頁獨佔整列 */
+/* 1. 「← 返回上一頁」獨佔第一行最高順位 */
 #backBtn {
-    grid-column: 1 / -1;
-    order: 1;
+    order: 1 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
 }
 
-/* 第 2 行：其餘 4 個功能按鈕依序平鋪 */
+/* 2. 其餘 4 個功能按鈕放在第二行，強迫水平平分排列 */
 .action-bar button:not(#backBtn),
 .action-bar .btn:not(#backBtn) {
-    order: 2;
-    font-size: 0.85rem !important;
+    order: 2 !important;
+    flex: 1 1 0px !important;
+    width: auto !important;
+    font-size: 0.82rem !important;
+    padding: 0 2px !important;
 }
 
 /* 上一班 / 下一班按鈕專屬樣式 */
@@ -439,12 +444,10 @@ body {
 .action-bar button,
 .action-bar .btn {
     height: 40px !important;
-    padding: 0 4px !important;
     margin: 0 !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
 }
-
 /* 桌機版（寬度 > 600px）恢復單行平舖 */
 @media (min-width: 601px) {
     .action-bar {
