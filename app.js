@@ -459,6 +459,9 @@ function normalizeSubject(subj) { // 輔助函式：去除科目尾綴字眼 (�
 /* ═══════════════════════════════════════════════════════════
     填充查詢 UI
 ═══════════════════════════════════════════════════════════ */ // 區塊標題：渲染查詢頁面下拉選單 UI
+/* ═══════════════════════════════════════════════════════════
+    填充查詢 UI
+═══════════════════════════════════════════════════════════ */ // 區塊標題：渲染查詢頁面下拉選單 UI
 function populateQueryUI() { // 函式：將班級與科目資料填入對應選單
     populateGradeSelect('sel7',  classGroups['七年級']); // 填入七年級班級選單
     populateGradeSelect('sel8',  classGroups['八年級']); // 填入八年級班級選單
@@ -467,15 +470,41 @@ function populateQueryUI() { // 函式：將班級與科目資料填入對應選
 
     const subjectSel = document.getElementById('subjectSelect'); // 取得教師查詢的「任教科目」選單 DOM
     if (subjectSel) { // 若選單 DOM 存在
-        subjectSel.innerHTML = '<option value="">— 選擇科目 —</option>'; // 重置預設預設選項
-        Object.keys(subjectTeachers).sort().forEach(s => { // 尋訪所有科目名稱並按字典順序排序
+        subjectSel.innerHTML = '<option value="">— 選擇科目 —</option>'; // 重置預設選項
+
+        // 1. 定義要置頂排序的科目清單（請依需求自行調整順序與科目名稱）
+        const topSubjects = ['國語文', '英語文', '本土語', '數學', '生物', '地理', '歷史', '公民', '理化', '地球科學', '輔導', '家政', '童軍', '生活科技', '資訊科技', '音樂', '視覺藝術', '表演藝術', '體育', '健康教育'];
+
+        // 2. 取得所有科目並執行排序
+        const sortedSubjects = Object.keys(subjectTeachers).sort((a, b) => {
+            const indexA = topSubjects.indexOf(a);
+            const indexB = topSubjects.indexOf(b);
+
+            // 情況 A：兩者都在置頂清單中，按置頂清單的順序排序
+            if (indexA !== -1 && indexB !== -1) {
+                return indexA - indexB;
+            }
+            // 情況 B：a 在置頂清單中，a 往前排
+            if (indexA !== -1) {
+                return -1;
+            }
+            // 情況 C：b 在置頂清單中，b 往前排
+            if (indexB !== -1) {
+                return 1;
+            }
+            // 情況 D：兩者都不在置頂清單中，按一般字典順序（筆畫/注音）排序
+            return a.localeCompare(b, 'zh-TW');
+        });
+
+        // 3. 將排序後的科目渲染至下拉選單
+        sortedSubjects.forEach(s => {
             const opt = document.createElement('option'); // 建立 option 元素
-            opt.value = s; opt.textContent = s; // 設定 option 的值與顯示文字為科目名稱
+            opt.value = s; 
+            opt.textContent = s; // 設定 option 的值與顯示文字為科目名稱
             subjectSel.appendChild(opt); // 將 option 加入科目選單
-        }); // 尋訪結束
+        });
     } // if 結束
 } // populateQueryUI 函式結束
-
 function populateGradeSelect(selId, classes) { // 輔助函式：填入特定年級選單
     const sel = document.getElementById(selId); // 依 ID 取得選單 DOM
     if (!sel) return; // 若不存在直接結束
