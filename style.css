@@ -1009,3 +1009,47 @@ tr.period-8-row {
         line-height: 1.1;              /* 行高 1.1 */
     }
 }
+/* ── 13.5 教師課表班級按鈕年級色彩設定 ────────────────────── */
+/* 七年級：淡藍底藍字 (例如: 710) */
+.cell-link.grade-7-link {
+    background-color: #e0f2fe !important;
+    color: #0284c7 !important;
+    border-color: #bae6fd !important;
+}
+.cell-link.grade-7-link:hover {
+    background-color: #0284c7 !important;
+    color: #ffffff !important;
+}
+
+/* 八年級：淡橘底橘字 (例如: 810) */
+.cell-link.grade-8-link {
+    background-color: #ffe4d9 !important;
+    color: #96482d !important;
+    border-color: #ffcbd1 !important;
+}
+.cell-link.grade-8-link:hover {
+    background-color: #96482d !important;
+    color: #ffffff !important;
+}
+
+/* 九年級：淡綠底綠字 (例如: 910) */
+.cell-link.grade-9-link {
+    background-color: #dcfce7 !important;
+    color: #15803d !important;
+    border-color: #bbf7d0 !important;
+}
+.cell-link.grade-9-link:hover {
+    background-color: #15803d !important;
+    color: #ffffff !important;
+}
+
+/* 特殊班/其他：淡黃底黃棕字 */
+.cell-link.grade-special-link {
+    background-color: #fef9c3 !important;
+    color: #ca8a04 !important;
+    border-color: #fef08a !important;
+}
+.cell-link.grade-special-link:hover {
+    background-color: #ca8a04 !important;
+    color: #ffffff !important;
+}
